@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useProjectStore } from "../store/project";
+import { Link } from "react-router-dom";
 
 const CreatePage = () => {
   const [newProject, setNewProject] = useState({
@@ -114,9 +115,11 @@ const CreatePage = () => {
                 setNewProject({ ...newProject, show: e.target.value })
               }
             />
-            <Button colorScheme="blue" onClick={handleAddProject} w="full">
-              Add Project
-            </Button>
+            <Link to={"/"}>
+              <Button colorScheme="blue" onClick={handleAddProject} w="full">
+                Add Project
+              </Button>
+            </Link>
           </VStack>
         </Box>
       </VStack>

@@ -87,7 +87,7 @@ const ProjectCard = ({ project }) => {
           <Text fontSize={"sm"} color={textColor} mb={2}>
             {project.description}
           </Text>
-          {/* <HStack spacing={2}>
+          <HStack spacing={2}>
             <IconButton
               icon={<EditIcon />}
               onClick={onOpen}
@@ -98,7 +98,7 @@ const ProjectCard = ({ project }) => {
               onClick={() => handleDeleteProject(project._id)}
               colorScheme={"red"}
             />
-          </HStack> */}
+          </HStack>
         </Box>
 
         <Modal isOpen={isOpen} onClose={onClose}>
