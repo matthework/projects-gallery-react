@@ -1,4 +1,4 @@
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { DeleteIcon, EditIcon, LinkIcon, ViewIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -14,11 +14,15 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Link,
+  Spacer,
+  Stack,
   Text,
   useColorModeValue,
   useDisclosure,
   useToast,
   VStack,
+  Tooltip,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useProjectStore } from "../store/project";
@@ -79,26 +83,44 @@ const ProjectCard = ({ project }) => {
           h={48}
           w={"full"}
           objectFit={"cover"}
+          fallbackSrc="base.jpg"
         />
-        <Box p={4}>
+        <Box p={5} height={200}>
           <Heading as={"h3"} size={"md"} color={textColor} mb={2}>
             {project.name}
           </Heading>
-          <Text fontSize={"sm"} color={textColor} mb={2}>
-            {project.description}
-          </Text>
-          <HStack spacing={2}>
-            <IconButton
-              icon={<EditIcon />}
-              onClick={onOpen}
-              colorScheme={"blue"}
-            />
-            <IconButton
-              icon={<DeleteIcon />}
-              onClick={() => handleDeleteProject(project._id)}
-              colorScheme={"red"}
-            />
-          </HStack>
+          <Tooltip label={project.description} borderRadius={3}>
+            <Text fontSize={"sm"} color={textColor} mb={2} noOfLines={3}>
+              {project.description}
+            </Text>
+          </Tooltip>
+          <Stack spacing={8} direction={"row"} mt={5}>
+            <HStack spacing={2}>
+              <IconButton
+                icon={<EditIcon />}
+                onClick={onOpen}
+                colorScheme={"blue"}
+              />
+              <IconButton
+                icon={<DeleteIcon />}
+                onClick={() => handleDeleteProject(project._id)}
+                colorScheme={"red"}
+              />
+            </HStack>
+            <Spacer />
+            <HStack spacing={2}>
+              <Tooltip label="Live View on AWS" borderRadius={3}>
+                <Link href={project.url_live} isExternal>
+                  <IconButton icon={<ViewIcon />} />
+                </Link>
+              </Tooltip>
+              <Tooltip label="Source Code on Github" borderRadius={3}>
+                <Link href={project.url_code} isExternal>
+                  <IconButton icon={<LinkIcon />} />
+                </Link>
+              </Tooltip>
+            </HStack>
+          </Stack>
         </Box>
 
         <Modal isOpen={isOpen} onClose={onClose}>

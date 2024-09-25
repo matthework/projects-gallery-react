@@ -9,6 +9,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useProjectStore } from "../store/project";
 import { Link } from "react-router-dom";
 
