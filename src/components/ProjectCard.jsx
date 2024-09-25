@@ -85,16 +85,14 @@ const ProjectCard = ({ project }) => {
           objectFit={"cover"}
           fallbackSrc="base.jpg"
         />
-        <Box p={5} height={200}>
+        <Box p={5}>
           <Heading as={"h3"} size={"md"} color={textColor} mb={2}>
             {project.name}
           </Heading>
-          <Tooltip label={project.description} borderRadius={3}>
-            <Text fontSize={"sm"} color={textColor} mb={2} noOfLines={3}>
-              {project.description}
-            </Text>
-          </Tooltip>
-          <Stack spacing={8} direction={"row"} mt={5}>
+          <Text fontSize={"sm"} color={textColor} mb={2}>
+            {project.description}
+          </Text>
+          <Stack spacing={8} direction={"row"} mt={3}>
             {/* <HStack spacing={2}>
               <IconButton
                 icon={<EditIcon />}

@@ -57,7 +57,7 @@ const HomePage = () => {
             </Link>
           </Text>
         )}
-        <Text>Developed by Matt Wang @ 2023 - {year}</Text>
+        <Text mt={5}>Developed by Matt Wang @ 2023 - {year}</Text>
       </VStack>
     </Container>
   );
