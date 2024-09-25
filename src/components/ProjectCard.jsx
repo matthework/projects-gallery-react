@@ -83,16 +83,24 @@ const ProjectCard = ({ project }) => {
           h={48}
           w={"full"}
           objectFit={"cover"}
-          fallbackSrc="base.jpg"
+          // fallbackSrc={"base.jpg"}
+          shadow={"sm"}
+          // mt={1}
         />
         <Box p={5}>
           <Heading as={"h3"} size={"md"} color={textColor} mb={2}>
             {project.name}
           </Heading>
-          <Text fontSize={"sm"} color={textColor} mb={2}>
+          <Text
+            fontSize={"sm"}
+            color={textColor}
+            mb={2}
+            height={90}
+            noOfLines={4}
+          >
             {project.description}
           </Text>
-          <Stack spacing={8} direction={"row"} mt={3}>
+          <Stack spacing={8} direction={"row"} mt={3} align={"bottom"}>
             {/* <HStack spacing={2}>
               <IconButton
                 icon={<EditIcon />}
@@ -107,16 +115,27 @@ const ProjectCard = ({ project }) => {
             </HStack> */}
             <Spacer />
             <HStack spacing={2}>
-              <Tooltip label="Live View on AWS" borderRadius={3}>
-                <Link href={project.url_live} isExternal>
-                  <IconButton icon={<ViewIcon />} />
-                </Link>
-              </Tooltip>
-              <Tooltip label="Source Code on Github" borderRadius={3}>
-                <Link href={project.url_code} isExternal>
-                  <IconButton icon={<LinkIcon />} />
-                </Link>
-              </Tooltip>
+              {project.url_live && (
+                <Tooltip label="Live View" borderRadius={3}>
+                  <Link href={project.url_live} isExternal>
+                    <IconButton icon={<ViewIcon />} />
+                  </Link>
+                </Tooltip>
+              )}
+              {project.url_code && (
+                <Tooltip label="Source Code" borderRadius={3}>
+                  <Link href={project.url_code} isExternal>
+                    <IconButton icon={<LinkIcon />} />
+                  </Link>
+                </Tooltip>
+              )}
+              {project.url && (
+                <Tooltip label="External URL" borderRadius={3}>
+                  <Link href={project.url} isExternal>
+                    <IconButton icon={<LinkIcon />} />
+                  </Link>
+                </Tooltip>
+              )}
             </HStack>
           </Stack>
         </Box>
@@ -184,6 +203,17 @@ const ProjectCard = ({ project }) => {
                   }
                 />
                 <Input
+                  placeholder="URL"
+                  name="external url"
+                  value={updatedProject.url}
+                  onChange={(e) =>
+                    setUpdatedProject({
+                      ...updatedProject,
+                      url: e.target.value,
+                    })
+                  }
+                />
+                <Input
                   placeholder="Index"
                   name="index"
                   type="number"
@@ -204,6 +234,17 @@ const ProjectCard = ({ project }) => {
                     setUpdatedProject({
                       ...updatedProject,
                       show: e.target.value,
+                    })
+                  }
+                />
+                <Input
+                  placeholder="Note"
+                  name="note"
+                  value={updatedProject.note}
+                  onChange={(e) =>
+                    setUpdatedProject({
+                      ...updatedProject,
+                      note: e.target.value,
                     })
                   }
                 />
