@@ -98,6 +98,14 @@ const CreatePage = () => {
               }
             />
             <Input
+              placeholder="External URL"
+              name="url"
+              value={newProject.url}
+              onChange={(e) =>
+                setNewProject({ ...newProject, url: e.target.value })
+              }
+            />
+            <Input
               placeholder="Index"
               name="index"
               type="number"
@@ -113,6 +121,14 @@ const CreatePage = () => {
               value={newProject.show}
               onChange={(e) =>
                 setNewProject({ ...newProject, show: e.target.value })
+              }
+            />
+            <Input
+              placeholder="Note"
+              name="note"
+              value={newProject.note}
+              onChange={(e) =>
+                setNewProject({ ...newProject, note: e.target.value })
               }
             />
             <Link to={"/"}>
