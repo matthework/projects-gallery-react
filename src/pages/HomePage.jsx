@@ -5,6 +5,7 @@ import ProjectCard from "../components/ProjectCard";
 import { useProjectStore } from "../store/project";
 
 const HomePage = () => {
+  const year = new Date().getFullYear();
   const { fetchProjects, projects } = useProjectStore();
 
   useEffect(() => {
@@ -56,6 +57,7 @@ const HomePage = () => {
             </Link>
           </Text>
         )}
+        <Text>Developed by Matt Wang @ 2023 - {year}</Text>
       </VStack>
     </Container>
   );

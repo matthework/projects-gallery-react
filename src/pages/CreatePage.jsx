@@ -9,6 +9,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useProjectStore } from "../store/project";
 
 const CreatePage = () => {
@@ -114,9 +115,11 @@ const CreatePage = () => {
                 setNewProject({ ...newProject, show: e.target.value })
               }
             />
-            <Button colorScheme="blue" onClick={handleAddProject} w="full">
-              Add Project
-            </Button>
+            <Link to={"/"}>
+              <Button colorScheme="blue" onClick={handleAddProject} w="full">
+                Add Project
+              </Button>
+            </Link>
           </VStack>
         </Box>
       </VStack>
