@@ -37,7 +37,7 @@ const HomePage = () => {
             <ProjectCard key={project._id} project={project} />
           ))}
         </SimpleGrid>
-        {projects.length === 0 && (
+        {/* {projects.length === 0 && (
           <Text
             fontSize={"xl"}
             fontWeight={"bold"}
@@ -55,7 +55,7 @@ const HomePage = () => {
               </Text>
             </Link>
           </Text>
-        )}
+        )} */}
       </VStack>
     </Container>
   );
