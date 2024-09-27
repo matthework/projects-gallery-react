@@ -3,6 +3,7 @@ import apiFetch from "../controllers/apiFetch";
 
 export const useProjectStore = create((set) => ({
   projects: [],
+  loading: false,
   setProjects: (projects) => set({ projects }),
   createProject: async (newProject) => {
     if (!newProject.name) {
@@ -23,10 +24,11 @@ export const useProjectStore = create((set) => ({
     return { success: true, message: "Successfully created." };
   },
   fetchProjects: async () => {
+    set({ loading: true });
     const res = await apiFetch("/api/projects");
     const data = await res.json();
     // const data = json.success ? json : Promise.reject(json);
-    set({ projects: data.data });
+    set({ projects: data.data, loading: false });
     // return { success: true, message: "Successfully loaded." };
   },
   deleteProject: async (pid) => {

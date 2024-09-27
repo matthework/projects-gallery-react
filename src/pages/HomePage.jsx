@@ -1,11 +1,18 @@
-import { Container, SimpleGrid, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  SimpleGrid,
+  Spinner,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProjectCard from "../components/ProjectCard";
 import { useProjectStore } from "../store/project";
 
 const HomePage = () => {
-  const { fetchProjects, projects } = useProjectStore();
+  const { projects, loading, fetchProjects } = useProjectStore();
 
   useEffect(() => {
     fetchProjects();
@@ -23,7 +30,6 @@ const HomePage = () => {
         >
           My Projects
         </Text>
-
         <SimpleGrid
           columns={{
             base: 1,
@@ -37,7 +43,12 @@ const HomePage = () => {
             <ProjectCard key={project._id} project={project} />
           ))}
         </SimpleGrid>
-        {projects.length === 0 && (
+        {loading && (
+          <Box display="flex" justifyContent="center" alignItems="center">
+            <Spinner size="xl" />
+          </Box>
+        )}
+        {/* {projects.length === 0 && (
           <Text
             fontSize={"xl"}
             fontWeight={"bold"}
@@ -55,7 +66,7 @@ const HomePage = () => {
               </Text>
             </Link>
           </Text>
-        )}
+        )} */}
       </VStack>
     </Container>
   );
