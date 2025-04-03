@@ -83,7 +83,7 @@ const ProjectCard = ({ project }) => {
           h={48}
           w={"full"}
           objectFit={"cover"}
-          // fallbackSrc={"base.jpg"}
+          fallbackSrc={"fallback.webp"}
           shadow={"sm"}
           // mt={1}
         />
@@ -181,7 +181,7 @@ const ProjectCard = ({ project }) => {
                   }
                 />
                 <Input
-                  placeholder="Live Preivew URL"
+                  placeholder="Live Preview URL"
                   name="live preview"
                   value={updatedProject.url_live}
                   onChange={(e) =>
