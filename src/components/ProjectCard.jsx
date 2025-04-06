@@ -93,6 +93,13 @@ const ProjectCard = ({ project }) => {
           ) : (
             <Text textDecoration="line-through">{project.name}</Text>
           )}
+          <Text
+            fontWeight="light"
+            fontSize={{ base: "xs", md: "sm" }}
+            color="gray.500"
+          >
+            Index: {project.index}
+          </Text>
         </Heading>
         <Text
           fontSize={"sm"}
