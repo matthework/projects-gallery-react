@@ -15,7 +15,7 @@ function App() {
         <Route path="/create" element={<CreatePage />} />
       </Routes>
       <Text padding={5} align={"center"}>
-        @{year} Created by Matt Wang
+        &copy; 2023-{year} Created by Matt Wang
       </Text>
     </Box>
   );
