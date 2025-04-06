@@ -39,16 +39,18 @@ const HomePage = () => {
           spacing={10}
           w={"full"}
         >
-          {projects.map((project) => (
-            <ProjectCard key={project._id} project={project} />
-          ))}
+          {[...projects]
+            .sort((a, b) => b.index - a.index)
+            .map((project) => (
+              <ProjectCard key={project._id} project={project} />
+            ))}
         </SimpleGrid>
         {loading && (
           <Box display="flex" justifyContent="center" alignItems="center">
             <Spinner size="xl" />
           </Box>
         )}
-        {/* {projects.length === 0 && (
+        {projects.length === 0 && (
           <Text
             fontSize={"xl"}
             fontWeight={"bold"}
@@ -56,17 +58,8 @@ const HomePage = () => {
             color={"gray.500"}
           >
             No project found.
-            <Link to={"/create"}>
-              <Text
-                as={"span"}
-                color={"blue.500"}
-                _hover={{ textDecoration: "underline" }}
-              >
-                Add new project
-              </Text>
-            </Link>
           </Text>
-        )} */}
+        )}
       </VStack>
     </Container>
   );

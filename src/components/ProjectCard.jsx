@@ -68,205 +68,207 @@ const ProjectCard = ({ project }) => {
   };
 
   return (
-    project.show && (
-      <Box
-        shadow={"lg"}
-        rounded={"lg"}
-        overflow={"hidden"}
-        transition={"all 0.3s"}
-        _hover={{ transform: "translateY(-5px)", shadow: "xl" }}
-        bg={bgColor}
-      >
-        <Image
-          src={project.url_image}
-          alt={project.name}
-          h={48}
-          w={"full"}
-          objectFit={"cover"}
-          // fallbackSrc={"base.jpg"}
-          shadow={"sm"}
-          // mt={1}
-        />
-        <Box p={5}>
-          <Heading as={"h3"} size={"md"} color={textColor} mb={2}>
-            {project.name}
-          </Heading>
-          <Text
-            fontSize={"sm"}
-            color={textColor}
-            mb={2}
-            height={90}
-            noOfLines={4}
-          >
-            {project.description}
-          </Text>
-          <Stack spacing={8} direction={"row"} mt={3} align={"bottom"}>
-            <HStack spacing={2}>
-              <IconButton
-                icon={<EditIcon />}
-                onClick={onOpen}
-                colorScheme={"blue"}
-              />
-              <IconButton
-                icon={<DeleteIcon />}
-                onClick={() => handleDeleteProject(project._id)}
-                colorScheme={"red"}
-              />
-            </HStack>
-            <Spacer />
-            <HStack spacing={2}>
-              {project.url_live && (
-                <Tooltip label="Live View" borderRadius={3}>
-                  <Link href={project.url_live} isExternal>
-                    <IconButton icon={<ViewIcon />} />
-                  </Link>
-                </Tooltip>
-              )}
-              {project.url_code && (
-                <Tooltip label="Source Code" borderRadius={3}>
-                  <Link href={project.url_code} isExternal>
-                    <IconButton icon={<LinkIcon />} />
-                  </Link>
-                </Tooltip>
-              )}
-              {project.url && (
-                <Tooltip label="External URL" borderRadius={3}>
-                  <Link href={project.url} isExternal>
-                    <IconButton icon={<LinkIcon />} />
-                  </Link>
-                </Tooltip>
-              )}
-            </HStack>
-          </Stack>
-        </Box>
-
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Update Project</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <VStack spacing={4}>
-                <Input
-                  placeholder="Project Name"
-                  name="name"
-                  value={updatedProject.name}
-                  onChange={(e) =>
-                    setUpdatedProject({
-                      ...updatedProject,
-                      name: e.target.value,
-                    })
-                  }
-                />
-                <Input
-                  placeholder="Description"
-                  name="description"
-                  value={updatedProject.description}
-                  onChange={(e) =>
-                    setUpdatedProject({
-                      ...updatedProject,
-                      description: e.target.value,
-                    })
-                  }
-                />
-                <Input
-                  placeholder="Image URL"
-                  name="image"
-                  value={updatedProject.url_image}
-                  onChange={(e) =>
-                    setUpdatedProject({
-                      ...updatedProject,
-                      url_image: e.target.value,
-                    })
-                  }
-                />
-                <Input
-                  placeholder="Live Preivew URL"
-                  name="live preview"
-                  value={updatedProject.url_live}
-                  onChange={(e) =>
-                    setUpdatedProject({
-                      ...updatedProject,
-                      url_live: e.target.value,
-                    })
-                  }
-                />
-                <Input
-                  placeholder="Source Code URL"
-                  name="source code"
-                  value={updatedProject.url_code}
-                  onChange={(e) =>
-                    setUpdatedProject({
-                      ...updatedProject,
-                      url_code: e.target.value,
-                    })
-                  }
-                />
-                <Input
-                  placeholder="URL"
-                  name="external url"
-                  value={updatedProject.url}
-                  onChange={(e) =>
-                    setUpdatedProject({
-                      ...updatedProject,
-                      url: e.target.value,
-                    })
-                  }
-                />
-                <Input
-                  placeholder="Index"
-                  name="index"
-                  type="number"
-                  value={updatedProject.index}
-                  onChange={(e) =>
-                    setUpdatedProject({
-                      ...updatedProject,
-                      index: e.target.value,
-                    })
-                  }
-                />
-                <Input
-                  placeholder="Show or Hide?"
-                  name="show"
-                  type="boolean"
-                  value={updatedProject.show}
-                  onChange={(e) =>
-                    setUpdatedProject({
-                      ...updatedProject,
-                      show: e.target.value,
-                    })
-                  }
-                />
-                <Input
-                  placeholder="Note"
-                  name="note"
-                  value={updatedProject.note}
-                  onChange={(e) =>
-                    setUpdatedProject({
-                      ...updatedProject,
-                      note: e.target.value,
-                    })
-                  }
-                />
-              </VStack>
-            </ModalBody>
-
-            <ModalFooter>
-              <Button
-                colorScheme={"blue"}
-                mr={3}
-                onClick={() => handleUpdateProject(project._id, updatedProject)}
-              >
-                Update
-              </Button>
-              <Button variant={"ghost"} onClick={onClose}>
-                Cancel
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+    <Box
+      shadow={"lg"}
+      rounded={"lg"}
+      overflow={"hidden"}
+      transition={"all 0.3s"}
+      _hover={{ transform: "translateY(-5px)", shadow: "xl" }}
+      bg={bgColor}
+    >
+      <Image
+        src={project.url_image}
+        alt={project.name}
+        h={48}
+        w={"full"}
+        objectFit={"cover"}
+        fallbackSrc={"fallback.webp"}
+        shadow={"sm"}
+        // mt={1}
+      />
+      <Box p={5}>
+        <Heading as={"h3"} size={"md"} color={textColor} mb={2}>
+          {project.show ? (
+            project.name
+          ) : (
+            <Text textDecoration="line-through">{project.name}</Text>
+          )}
+        </Heading>
+        <Text
+          fontSize={"sm"}
+          color={textColor}
+          mb={2}
+          height={90}
+          noOfLines={4}
+        >
+          {project.description}
+        </Text>
+        <Stack spacing={8} direction={"row"} mt={3} align={"bottom"}>
+          <HStack spacing={2}>
+            <IconButton
+              icon={<EditIcon />}
+              onClick={onOpen}
+              colorScheme={"blue"}
+            />
+            <IconButton
+              icon={<DeleteIcon />}
+              onClick={() => handleDeleteProject(project._id)}
+              colorScheme={"red"}
+            />
+          </HStack>
+          <Spacer />
+          <HStack spacing={2}>
+            {project.url_live && (
+              <Tooltip label="Live View" borderRadius={3}>
+                <Link href={project.url_live} isExternal>
+                  <IconButton icon={<ViewIcon />} />
+                </Link>
+              </Tooltip>
+            )}
+            {project.url_code && (
+              <Tooltip label="Source Code" borderRadius={3}>
+                <Link href={project.url_code} isExternal>
+                  <IconButton icon={<LinkIcon />} />
+                </Link>
+              </Tooltip>
+            )}
+            {project.url && (
+              <Tooltip label="External URL" borderRadius={3}>
+                <Link href={project.url} isExternal>
+                  <IconButton icon={<LinkIcon />} />
+                </Link>
+              </Tooltip>
+            )}
+          </HStack>
+        </Stack>
       </Box>
-    )
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Update Project</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <VStack spacing={4}>
+              <Input
+                placeholder="Project Name"
+                name="name"
+                value={updatedProject.name}
+                onChange={(e) =>
+                  setUpdatedProject({
+                    ...updatedProject,
+                    name: e.target.value,
+                  })
+                }
+              />
+              <Input
+                placeholder="Description"
+                name="description"
+                value={updatedProject.description}
+                onChange={(e) =>
+                  setUpdatedProject({
+                    ...updatedProject,
+                    description: e.target.value,
+                  })
+                }
+              />
+              <Input
+                placeholder="Image URL"
+                name="image"
+                value={updatedProject.url_image}
+                onChange={(e) =>
+                  setUpdatedProject({
+                    ...updatedProject,
+                    url_image: e.target.value,
+                  })
+                }
+              />
+              <Input
+                placeholder="Live Preview URL"
+                name="live preview"
+                value={updatedProject.url_live}
+                onChange={(e) =>
+                  setUpdatedProject({
+                    ...updatedProject,
+                    url_live: e.target.value,
+                  })
+                }
+              />
+              <Input
+                placeholder="Source Code URL"
+                name="source code"
+                value={updatedProject.url_code}
+                onChange={(e) =>
+                  setUpdatedProject({
+                    ...updatedProject,
+                    url_code: e.target.value,
+                  })
+                }
+              />
+              <Input
+                placeholder="URL"
+                name="external url"
+                value={updatedProject.url}
+                onChange={(e) =>
+                  setUpdatedProject({
+                    ...updatedProject,
+                    url: e.target.value,
+                  })
+                }
+              />
+              <Input
+                placeholder="Index"
+                name="index"
+                type="number"
+                value={updatedProject.index}
+                onChange={(e) =>
+                  setUpdatedProject({
+                    ...updatedProject,
+                    index: e.target.value,
+                  })
+                }
+              />
+              <Input
+                placeholder="Show or Hide?"
+                name="show"
+                type="boolean"
+                value={updatedProject.show}
+                onChange={(e) =>
+                  setUpdatedProject({
+                    ...updatedProject,
+                    show: e.target.value,
+                  })
+                }
+              />
+              <Input
+                placeholder="Note"
+                name="note"
+                value={updatedProject.note}
+                onChange={(e) =>
+                  setUpdatedProject({
+                    ...updatedProject,
+                    note: e.target.value,
+                  })
+                }
+              />
+            </VStack>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button
+              colorScheme={"blue"}
+              mr={3}
+              onClick={() => handleUpdateProject(project._id, updatedProject)}
+            >
+              Update
+            </Button>
+            <Button variant={"ghost"} onClick={onClose}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </Box>
   );
 };
 
