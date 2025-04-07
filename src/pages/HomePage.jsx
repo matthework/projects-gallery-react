@@ -49,7 +49,7 @@ const HomePage = () => {
             <Spinner size="xl" />
           </Box>
         )}
-        {projects.length === 0 && (
+        {projects.length === 0 && !loading && (
           <Text
             fontSize={"xl"}
             fontWeight={"bold"}
